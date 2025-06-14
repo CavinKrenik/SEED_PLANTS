@@ -8,11 +8,11 @@ function PlantDetail() {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/plants/${id}`)
+    axios.get(`https://seed-plants.onrender.com/plants/${id}`)
       .then(res => setPlant(res.data))
       .catch(() => setPlant(null));
 
-    axios.get(`http://localhost:5000/plant-images/${id}`)
+    axios.get(`https://seed-plants.onrender.com/plant-images/${id}`)
       .then(res => setImages(res.data))
       .catch(() => setImages([]));
   }, [id]);
@@ -21,10 +21,11 @@ function PlantDetail() {
 
   return (
     <div className="bg-seed-light min-h-screen p-6 text-seed-dark">
-      <div className="mb-4">
+      <div className="mb-4 flex justify-between items-center">
         <Link to="/" className="text-sm bg-seed-dark text-white px-3 py-1 rounded hover:bg-seed-accent">
           ← Back to Dashboard
         </Link>
+        <img src="/seed.gif" alt="Seed Logo" className="w-12 h-12" />
       </div>
 
       <h1 className="text-3xl font-bold mb-2">{plant.name}</h1>
@@ -41,7 +42,7 @@ function PlantDetail() {
           {images.map(img => (
             <img
               key={img.id}
-              src={`http://localhost:5000${img.image_url}`}
+              src={`https://seed-plants.onrender.com${img.image_url}`}
               alt="Plant"
               className="rounded shadow w-full h-32 object-cover"
             />

@@ -1,18 +1,21 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function PlantDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [plant, setPlant] = useState(null);
   const [images, setImages] = useState([]);
 
+  const BASE_URL = 'https://seed-plants.onrender.com';
+
   useEffect(() => {
-    axios.get(`http://localhost:5000/plants/${id}`)
+    axios.get(`${BASE_URL}/plants/${id}`)
       .then(res => setPlant(res.data))
       .catch(err => console.error(err));
 
-    axios.get(`http://localhost:5000/plant-images/${id}`)
+    axios.get(`${BASE_URL}/plant-images/${id}`)
       .then(res => setImages(res.data))
       .catch(err => console.error(err));
   }, [id]);
@@ -21,6 +24,16 @@ function PlantDetail() {
 
   return (
     <div className="p-6 bg-seed-light min-h-screen text-seed-dark">
+      {/* Back to Dashboard Button */}
+      <div className="mb-6">
+        <button
+          onClick={() => navigate('/')}
+          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+        >
+          ← Back to Dashboard
+        </button>
+      </div>
+
       <img src="/seed.gif" alt={plant.name} className="w-32 mx-auto mb-4" />
       <h1 className="text-3xl font-bold text-center mb-6">{plant.name}</h1>
 
@@ -41,7 +54,7 @@ function PlantDetail() {
             {images.map(img => (
               <img
                 key={img.id}
-                src={`http://localhost:5000${img.image_url}`}
+                src={`${BASE_URL}${img.image_url}`}
                 alt="Plant"
                 className="w-full h-32 object-cover rounded shadow"
               />

@@ -14,17 +14,19 @@ function AdminPanel() {
   const [editing, setEditing] = useState(false);
   const navigate = useNavigate();
 
+  const BASE_URL = "https://seed-plants.onrender.com";
+
   useEffect(() => {
-    axios.get("http://localhost:5000/plants")
+    axios.get(`${BASE_URL}/plants`)
       .then(res => setPlants(res.data))
       .catch(() => toast.error("Failed to load plants"));
   }, []);
 
   useEffect(() => {
     if (selectedId) {
-      axios.get(`http://localhost:5000/plants/${selectedId}`)
+      axios.get(`${BASE_URL}/plants/${selectedId}`)
         .then(res => setSelectedPlant(res.data));
-      axios.get(`http://localhost:5000/plant-images/${selectedId}`)
+      axios.get(`${BASE_URL}/plant-images/${selectedId}`)
         .then(res => setImages(res.data));
     } else {
       setSelectedPlant(null);
@@ -34,7 +36,7 @@ function AdminPanel() {
 
   const handleDeleteImage = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/delete-image/${id}`);
+      await axios.delete(`${BASE_URL}/delete-image/${id}`);
       toast.success("Image deleted");
       setImages(images.filter(img => img.id !== id));
     } catch {
@@ -46,7 +48,10 @@ function AdminPanel() {
     <div className="p-6 min-h-screen bg-seed-light">
       <h1 className="text-2xl font-bold text-seed-dark mb-4">🌱 Admin Panel</h1>
 
-      <button onClick={() => navigate("/")} className="mb-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+      <button
+        onClick={() => navigate("/")}
+        className="mb-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+      >
         ← Back to Dashboard
       </button>
 
@@ -82,7 +87,7 @@ function AdminPanel() {
                   {images.map(img => (
                     <div key={img.id} className="relative">
                       <img
-                        src={`http://localhost:5000${img.image_url}`}
+                        src={`${BASE_URL}${img.image_url}`}
                         alt="Plant"
                         className="w-full rounded shadow"
                       />
@@ -97,7 +102,7 @@ function AdminPanel() {
 
               <div className="mt-4">
                 <ImageUploadForm plantId={selectedId} onUpload={() => {
-                  axios.get(`http://localhost:5000/plant-images/${selectedId}`)
+                  axios.get(`${BASE_URL}/plant-images/${selectedId}`)
                     .then(res => setImages(res.data));
                 }} />
               </div>
@@ -112,7 +117,7 @@ function AdminPanel() {
               plant={selectedPlant}
               onCancel={() => setEditing(false)}
               onSave={() => {
-                axios.get(`http://localhost:5000/plants/${selectedId}`)
+                axios.get(`${BASE_URL}/plants/${selectedId}`)
                   .then(res => setSelectedPlant(res.data));
                 setEditing(false);
                 toast.success("Plant updated");
@@ -125,8 +130,9 @@ function AdminPanel() {
       <div className="bg-white rounded shadow p-4">
         <h2 className="text-lg font-bold mb-2">➕ Add New Plant</h2>
         <AddPlantForm onSuccess={() => {
-          axios.get("http://localhost:5000/plants")
+          axios.get(`${BASE_URL}/plants`)
             .then(res => setPlants(res.data));
+          toast.success("New plant added");
         }} />
       </div>
     </div>

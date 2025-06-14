@@ -1,4 +1,3 @@
-// src/components/LoginForm.jsx
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -11,7 +10,7 @@ function LoginForm({ setIsAdmin }) {
     e.preventDefault();
     try {
       const res = await axios.post(
-        'http://localhost:5000/login',
+        'https://seed-plants.onrender.com/login',
         { username, password },
         { withCredentials: true } // ✅ Send session cookie
       );
