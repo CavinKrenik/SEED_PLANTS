@@ -9,11 +9,11 @@ function PlantDetail() {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/plants/${id}`)
+    axios.get(`https://seed-plants.onrender.com/plants/${id}`)
       .then(res => setPlant(res.data))
       .catch(err => console.error(err));
 
-    axios.get(`http://localhost:5000/plant-images/${id}`)
+    axios.get(`https://seed-plants.onrender.com/plant-images/${id}`)
       .then(res => setImages(res.data))
       .catch(err => console.error(err));
   }, [id]);
@@ -50,7 +50,7 @@ function PlantDetail() {
             {images.map(img => (
               <img
                 key={img.id}
-                src={`http://localhost:5000${img.image_url}`}
+                src={`https://seed-plants.onrender.com${img.image_url}`}
                 alt="plant"
                 className="w-full rounded shadow"
               />

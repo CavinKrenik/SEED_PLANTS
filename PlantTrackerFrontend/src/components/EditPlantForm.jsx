@@ -25,7 +25,7 @@ function EditPlantForm({ plant, onCancel, onSave }) {
     }
 
     try {
-      await axios.put(`http://localhost:5000/plant/${plant.id}`, form, {
+      await axios.put(`https://seed-plants.onrender.com/plant/${plant.id}`, form, {
         withCredentials: true,
       });
       onSave(); // trigger refresh

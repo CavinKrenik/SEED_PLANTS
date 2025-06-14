@@ -14,7 +14,7 @@ function ImageUploadForm({ plantId, onUpload }) {
     formData.append('plant_id', plantId);
 
     try {
-      await axios.post('http://localhost:5000/upload-image', formData, {
+      await axios.post('https://seed-plants.onrender.com/upload-image', formData, {
         withCredentials: true  // ✅ Required for session cookie
       });
       setMessage('✅ Uploaded');

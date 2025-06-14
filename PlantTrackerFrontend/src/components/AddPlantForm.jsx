@@ -27,7 +27,7 @@ function AddPlantForm({ onAdded }) {
     }
 
     try {
-      await axios.post('http://localhost:5000/plant', form, {
+      await axios.post('https://seed-plants.onrender.com/plant', form, {
         withCredentials: true
       });
       setForm({
