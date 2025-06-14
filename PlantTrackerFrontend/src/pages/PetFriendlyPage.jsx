@@ -24,7 +24,7 @@ function PetFriendlyPage() {
             The Seeds Guide to Pet-Friendly Plants
           </h1>
           <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-            Here at the seed we believe in creating safe and beautiful spaces for both plants and pets. This guide focuses on pet-friendly plants that thrive in the Pacific Northwest.
+            Here at The Seed we believe in creating safe and beautiful spaces for both plants and pets. This guide focuses on pet-friendly plants that thrive in the Pacific Northwest.
           </p>
           <p>Knowledge about Safe, Toxic, or Poisonous plants is essential to Keeping our Loved ones Safe! </p>
           <Link

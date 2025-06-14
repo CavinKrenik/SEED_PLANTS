@@ -9,17 +9,19 @@ from auth import login_handler, logout_handler
 import os
 
 app = Flask(__name__)
-app.secret_key = "change-this-secret-key"
+app.secret_key = os.getenv("SECRET_KEY", "change-this-secret-key")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///seed.db'
 app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
+app.config['SESSION_COOKIE_SAMESITE'] = 'None'   # ✅ Allow cross-site cookies
+app.config['SESSION_COOKIE_SECURE'] = True       # ✅ Required for HTTPS cookies
 
-# ✅ Enable CORS with credentials support
-CORS(app, supports_credentials=True)
+# ✅ Enable CORS with credentials and Netlify domain
+CORS(app, origins=["https://seedplants.netlify.app"], supports_credentials=True)
 
-
+# Initialize database
 db.init_app(app)
 
-# Register blueprints
+# Register routes
 app.register_blueprint(plant_bp)
 app.register_blueprint(image_bp)
 
@@ -39,4 +41,4 @@ def serve_image(filename):
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(debug=True)
+    app.run(debug=False)
