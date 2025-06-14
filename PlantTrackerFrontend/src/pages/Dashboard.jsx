@@ -14,7 +14,7 @@ function Dashboard() {
   const categories = ['All', 'Vegetables', 'Fruits', 'Herbs', 'Flowers'];
 
   useEffect(() => {
-    axios.get('http://localhost:5000/plants')
+    axios.get('https://seed-plants.onrender.com/plants')
       .then(res => {
         setPlants(res.data);
         setFiltered(res.data);
@@ -99,7 +99,7 @@ function Dashboard() {
             <p className="text-sm text-gray-600 mb-2">{plant.category || 'N/A'}</p>
             {plant.image_url ? (
               <img
-                src={`http://localhost:5000${plant.image_url}`}
+                src={`https://seed-plants.onrender.com${plant.image_url}`}
                 alt={plant.name}
                 className="w-full h-32 object-cover rounded"
               />

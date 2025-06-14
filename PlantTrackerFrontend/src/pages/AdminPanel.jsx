@@ -15,7 +15,7 @@ function AdminPanel() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("http://localhost:5000/plants")
+    axios.get("https://seed-plants.onrender.com/plants")
       .then(res => setPlants(res.data))
       .catch(() => toast.error("Failed to load plants"));
   }, []);
@@ -32,8 +32,8 @@ function AdminPanel() {
   const fetchPlantData = async (id) => {
     try {
       const [plantRes, imageRes] = await Promise.all([
-        axios.get(`http://localhost:5000/plants/${id}`),
-        axios.get(`http://localhost:5000/plant-images/${id}`)
+        axios.get(`https://seed-plants.onrender.com/plants/${id}`),
+        axios.get(`https://seed-plants.onrender.com/plant-images/${id}`)
       ]);
       setSelectedPlant(plantRes.data);
       setImages(imageRes.data);
@@ -44,7 +44,7 @@ function AdminPanel() {
 
   const handleDeleteImage = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/delete-image/${id}`);
+      await axios.delete(`https://seed-plants.onrender.com/delete-image/${id}`);
       toast.success("Image deleted");
       setImages(images.filter(img => img.id !== id));
     } catch {
@@ -56,7 +56,7 @@ function AdminPanel() {
     await fetchPlantData(selectedId);
     setEditing(false);
     toast.success("Plant updated");
-    axios.get("http://localhost:5000/plants").then(res => setPlants(res.data));
+    axios.get("https://seed-plants.onrender.com/plants").then(res => setPlants(res.data));
   };
 
   const handleLogout = () => {
@@ -105,7 +105,7 @@ function AdminPanel() {
                   {images.map(img => (
                     <div key={img.id} className="relative w-40 h-40">
                       <img
-                        src={`http://localhost:5000${img.image_url}`}
+                        src={`https://seed-plants.onrender.com${img.image_url}`}
                         alt="Plant"
                         className="w-full h-full object-cover rounded shadow"
                       />
@@ -140,7 +140,7 @@ function AdminPanel() {
       <div className="bg-white rounded shadow p-4">
         <h2 className="text-lg font-bold mb-2">➕ Add New Plant</h2>
         <AddPlantForm onSuccess={() => {
-          axios.get("http://localhost:5000/plants").then(res => setPlants(res.data));
+          axios.get("https://seed-plants.onrender.com/plants").then(res => setPlants(res.data));
           toast.success("New plant added");
         }} />
       </div>
