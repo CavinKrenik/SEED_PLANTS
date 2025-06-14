@@ -47,8 +47,10 @@ def logout():
 def serve_image(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-# ✅ DB Creation on Startup (for Render)
+# ✅ Always create DB tables — including on Render
+with app.app_context():
+    db.create_all()
+
+# ✅ Run locally only
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run(debug=False)
