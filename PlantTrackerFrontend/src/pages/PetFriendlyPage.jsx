@@ -4,21 +4,42 @@ import { Link } from 'react-router-dom';
 function PetFriendlyPage() {
   return (
     <div className="bg-gray-50 text-gray-800">
-            <header className="bg-white shadow-md">
-                <div className="container mx-auto px-6 py-8 text-center">
-                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight gradient-text">A Pet Owner's Guide to a Safe & Beautiful Garden</h1>
-                    <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Visualizing plant safety in Washington State to help you cultivate a space that's vibrant for you and safe for your furry family members.</p>
-                    <Link to="/" className="bg-green-400 text-white px-3 py-2 rounded hover:bg-green-700">
-                     ← Back to Dashboard
-                   </Link>
-                </div>
-            </header>
+      <header className="bg-white shadow-md relative">
+        {/* Top-left image */}
+        <img
+          src="/leo.png"
+          alt="Leo Logo"
+          className="absolute top-4 left-4 w-14 h-14 md:w-20 md:h-20"
+        />
+
+        {/* Top-right image */}
+        <img
+          src="/seedsticker8.png"
+          alt="Seed Sticker"
+          className="absolute top-4 right-4 w-14 h-14 md:w-20 md:h-20"
+        />
+
+        <div className="container mx-auto px-6 py-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight gradient-text">
+            The Seeds Guide to Pet-Friendly Plants
+          </h1>
+          <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+            Here at the seed we believe in creating safe and beautiful spaces for both plants and pets. This guide focuses on pet-friendly plants that thrive in the Pacific Northwest.
+          </p>
+          <p>Knowledge about Safe, Toxic, or Poisonous plants is essential to Keeping our Loved ones Safe! </p>
+          <Link
+            to="/"
+            className="mt-6 inline-block bg-green-400 text-white px-4 py-2 rounded hover:bg-green-700"
+          >
+            ← The Garden is This Way!
+          </Link>
+        </div>
+      </header>
 
             <main className="container mx-auto p-4 md:p-8">
                 <section id="matlock-focus" className="mb-16">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold text-gray-900">Hyperlocal Focus: Matlock, WA (Mason County)</h2>
-                        <p className="mt-2 text-md text-gray-600 max-w-2xl mx-auto">For residents of Matlock and Mason County, we've identified specific native and well-suited plants that are confirmed to be safe or pose risks to your animal companions.</p>
+                        <h2 className="text-3xl font-bold text-gray-900">Pacific Northwest</h2>
                     </div>
                     <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 overflow-x-auto mb-8">
                         <h3 className="text-2xl font-bold text-gray-900 mb-4">Pet-Friendly Plants for Matlock, WA</h3>
